@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
+
 import propTypes from 'prop-types'
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './styles.module.css';
 import HomePage from './views/HomePage'
@@ -11,10 +12,7 @@ class App extends Component {
     return (
       <Suspense fallback={<p>Загружаем.... </p>}>
         <Switch>
-    
-       <HomePage/>
-
-  
+      <HomePage/>
       </Switch>
       </Suspense>
     );

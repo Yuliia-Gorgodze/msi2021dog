@@ -10,9 +10,7 @@ font-style: normal;
 
 }
 .baseContainer{
-      position: relative;
-    left: 50%;
-width:50%;   
+ left: 50%;
 min-height: 840px;
 background-color: #FBE0DC;
 
@@ -55,4 +53,9 @@ margin-bottom: 20px;
 }
 .logo{
   margin-bottom: 80px;
+}
+.container {
+  position: relative;
+  left: 50%;
+  width:50%; 
 }

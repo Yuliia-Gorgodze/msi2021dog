@@ -1,0 +1,67 @@
+.form{
+    padding: 20px;
+    background: #F8F8F7;
+    border-radius: 20px;
+    margin-top: 20px;
+
+}
+
+.containerViews{
+    padding: 20px;
+ background: #FFFFFF;
+border-radius: 20px;
+}
+.titleLabel{
+    font-style: normal;
+font-weight: 500;
+font-size: 10px;
+line-height: 18px;
+    color: #8C8C8C;
+    text-transform: uppercase;
+    margin-left: 12px;
+}
+.titleLabel>option{
+    font-family: Jost;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: #1D1D1D;
+}
+.input{
+    border: none;
+    border-radius: 10px;
+}
+.button{
+    border-radius: 10px;
+    border: none;
+    width: 143px;
+height: 40px;
+text-transform: uppercase;
+font-style: normal;
+}
+
+
+.buttonGallery:disabled{
+    background: #FF868E;;
+}
+.buttonGoBuck{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #FBE0DC;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+}
+.buttonGoBuck:hover{
+    background: #FF868E;
+    fill: #FFFFFF;
+}
+.buttonGroup{
+    
+    position: relative;
+    margin-bottom: 20px;
+}

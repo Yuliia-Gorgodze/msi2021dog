@@ -1,18 +1,21 @@
 
 import React, { Component } from 'react'; 
+import { Route } from 'react-router-dom';
 import styles from './styles/homePage.module.css'
-import imgHome from '../img/girl-and-pet.png'
 import logo from '../img/Logo.svg'
 import NavigationList from '../components/NavigationListHome'
-import ViewsPage from './ViewsPage'
+import GalleryPage from './GalleryPage'
+import HomePreviews from '../components/HomePreviewsImg'
+import Search from '../components/SearchNameMenu'
+import Breeds from './BreedsPage'
+import Voting from './VotingPage'
 class HomePage extends Component {
    state = {
-       renderPage : true
+       renderPage : false
    }
     render () {
         return (<> 
             <div className={styles.baseContainerHome}>
-            
             <div className={styles.homeContainer}>
             <img alt='logo' src={logo} className={styles.logo}/>
             <h2 className= {styles.title}> Hi intern!</h2>
@@ -20,14 +23,16 @@ class HomePage extends Component {
              <span className={styles.listTitle}>Lets start using The Dogs API</span>
              <NavigationList/>
             </div>
-             
-             {this.state.renderPage ? <div className={styles.baseContainer}>
-             <img className={styles.imgHome} src={imgHome} width='100%' alt='imgPreviws'/>
-             
-             </div> : <ViewsPage/>}
-             
+             <div className={styles.container}>
+             <Route exact path="/" component={HomePreviews} />
+             <Route path="/gallery" component={Search} />
+             <Route path="/gallery" component={GalleryPage} />
+             <Route path="/breeds" component={Search} />
+             <Route path="/breeds" component={Breeds} />
+             <Route path="/voting" component={Search} />
+             <Route path="/voting" component={Voting} />
+             </div>
             </div>
-            
             </>)
     } 
 }

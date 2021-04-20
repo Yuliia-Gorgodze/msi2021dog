@@ -3,6 +3,9 @@
 
     }
 .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 36px;
 width: 138px;
 border: none;
@@ -13,8 +16,10 @@ color: #FF868E;
 }
 .button:hover{
     background-color: #FBE0DC;
+    color: #FF868E;
+    text-decoration: none;
 }
-.button:active{
+.buttonActive{
     color: #FFFFFF;
     background-color: #FF868E;
 }
