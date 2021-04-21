@@ -1,22 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit'
 import {
-  getDogRequest,
-  getDogSuccess,
-  getDogError,
-  addContactRequest,
-  addContactSuccess,
-  addContactError,
-  deleteContactRequest,
-  deleteContactSuccess,
-  deleteContactErrors,
-  filterAction,
+  getImagesRequest,getImagesSuccess, getImagesError, getImagesFormSuccess, getBreedImagesSuccess
 } from './dogActions'
 
 const dogReducer = createReducer([], {
-//   [getContactsSuccess]: (_, { payload }) => payload,
-//   [addContactSuccess]: (state, { payload }) => [...state, payload],
-//   [deleteContactSuccess]: (state, { payload }) =>
-//     state.filter((order) => order.id !== payload),
+  [getImagesSuccess]: (_, { payload }) => payload,
+  [getImagesFormSuccess]: (_, {payload}) => payload,
+  [getBreedImagesSuccess]: (_, {payload}) => payload,
 })
 
 

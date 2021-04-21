@@ -5,8 +5,12 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux';
 import styles from './styles/galleryPage.module.css'
 import goBack from '../img/goBack.svg'
+import submit from '../img/submit.svg'
 
+import operations from '../redux/dog/dogOperation'
 import ModalUpload from '../components/ModalUpload'
+import GalleryList from '../components/GalleryList'
+
 
 
 class GalleryPage extends Component {
@@ -15,20 +19,25 @@ state = {
   type: 'All',
   breed: 'None',
   limit: '5 items per page',
-  modal: false
 }
 handleChange = (e) => {
 this.setState({[e.target.name]: e.target.value})
 }
 
-
+onSubmiteForm = event => {
+  event.preventDefault();
+  console.log('state', this.state)
+  this.props.select(this.state)
+}
   render() {
+    
+    
     return (
      <>
      
      <div className={styles.containerViews}>
      
-  <Form className={styles.form}>
+  <Form onSubmit={this.onSubmiteForm} className={styles.form}>
   <div className={styles.buttonGroup}><Button className={styles.buttonGoBuck} type="button"><img src={goBack}/></Button>
      <Button className={`${styles.buttonGallery} ${styles.button}` } disabled type="button">gallery</Button>
      <ModalUpload/>
@@ -46,7 +55,7 @@ this.setState({[e.target.name]: e.target.value})
   <Form.Group>
  
     <Form.Label  className={styles.titleLabel}>type</Form.Label>
-    <Form.Control onChange={this.handleChange} name='type' className={styles.input} as="select" >
+    <Form.Control onChange={this.handleChange} name='type' className={`${styles.input} ${styles.inputSecondary}`} as="select" >
       <option>All</option>
       <option>Static</option>
       <option>Animated</option>
@@ -66,21 +75,27 @@ this.setState({[e.target.name]: e.target.value})
   </Form.Group>
   <Form.Group>
     <Form.Label className={styles.titleLabel}>limit</Form.Label>
-    <Form.Control onChange={this.handleChange} name='limit' className={styles.input} as="select" >
+    <Form.Control onChange={this.handleChange} name='limit' className={`${styles.input} ${styles.lastInput}`} as="select" >
       <option>5 items per page</option>
       <option>10 items per page</option>
       <option>15 items per page</option>
       <option>20 items per page</option>
     </Form.Control>
   </Form.Group>
+  <Button onClick={this.onSubmiteForm}  className={styles.buttonGoBuck} type="submit"><img src={submit}/></Button>
   </Form>
-  
   </div>
+  <GalleryList  />
+
      </>
     );
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  select: (obj) => dispatch(operations.getImagesForm(obj))
+});
 
-export default GalleryPage;
+export default connect(null, mapDispatchToProps)(GalleryPage);
 
+ 

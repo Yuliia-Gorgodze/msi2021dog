@@ -1,0 +1,13 @@
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+.list>li{
+    margin: 15px;
+   
+}
+.img{
+    display: block;
+    border-radius: 20px;
+}

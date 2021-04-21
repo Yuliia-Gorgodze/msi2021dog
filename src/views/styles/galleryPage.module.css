@@ -1,4 +1,6 @@
 .form{
+    display: flex;
+    flex-wrap: wrap;
     padding: 20px;
     background: #F8F8F7;
     border-radius: 20px;
@@ -29,8 +31,18 @@ line-height: 24px;
 color: #1D1D1D;
 }
 .input{
+    width: 290px;
+    height: 40px;
     border: none;
     border-radius: 10px;
+}
+.inputSecondary{
+    margin-left: 12px;
+}
+.lastInput{
+    margin-left: 12px;
+    width: 240px;
+height: 40px;
 }
 .button{
     border-radius: 10px;
@@ -41,7 +53,13 @@ text-transform: uppercase;
 font-style: normal;
 }
 
-
+.buttonSubmit{
+    width: 40px;
+    height: 40px;
+    border-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+}
 .buttonGallery:disabled{
     background: #FF868E;;
 }
@@ -63,5 +81,6 @@ font-style: normal;
 .buttonGroup{
     
     position: relative;
+    width: 100%;
     margin-bottom: 20px;
 }

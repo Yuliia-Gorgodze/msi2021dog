@@ -5,38 +5,49 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux';
 import styles from './styles/breedsPage.module.css'
 import goBack from '../img/goBack.svg'
-
-import ModalUpload from '../components/ModalUpload'
-
+import abSort from '../img/abSort.svg'
+import baSort from '../img/baSort.svg'
+import selectors from '../redux/dog/dogSelectors'
+import operations from '../redux/dog/dogOperation'
+// import ModalUpload from '../components/ModalUpload'
+import GalleryList from '../components/GalleryList'
 
 class BreedsPage extends Component {
 state = {
-  order: 'Random',
-  type: 'All',
-  breed: 'None',
-  limit: '5 items per page',
-  modal: false
+  breed: 'All breeds',
+  limit: 'Limit: 5',
+
 }
 handleChange = (e) => {
 this.setState({[e.target.name]: e.target.value})
+
 }
-
-
+componentDidMount() {
+  console.log(this.props)
+  this.props.select(this.state)
+}
+onSubmiteForm = event => {
+  event.preventDefault();
+  
+}
+sortAB = () => {
+  console.log(this.props.images)
+  //  this.props.images.sort()
+}
   render() {
     return (
      <>
      
      <div className={styles.containerBreeds}>
      
-  <Form className={styles.form}>
+  <Form  className={styles.form}>
   <div className={styles.buttonGroup}><Button className={styles.buttonGoBuck} type="button"><img src={goBack}/></Button>
      <Button className={`${styles.buttonBreeds} ${styles.button}` } disabled type="button">breeds</Button>
-    
+
      </div>
     
   <Form.Group >
-
-    <Form.Control  className={styles.input} onChange={this.handleChange} name='order'  as="select" >
+    <Form.Control onSelect={this.onSubmiteForm}  className={styles.input} onChange={this.handleChange} name='breed'  as="select" >
       <option>All breeds</option>
       <option>Affenpinscher</option>
       <option>Afghan Hound</option>
@@ -48,19 +59,27 @@ this.setState({[e.target.name]: e.target.value})
     </Form.Control>
   </Form.Group>
   <Form.Group >
-    <Form.Control onChange={this.handleChange} className={styles.inputLimit} name='type' as="select" >
+    <Form.Control  className={styles.inputLimit} name='limit' as="select" >
     <option>Limit: 5</option>
       <option>Limit: 10</option>
       <option>Limit: 15</option>
       <option>Limit: 20</option>
     </Form.Control>
   </Form.Group>
+  <Button onClick={this.sortAB} className={`${styles.buttonGoBuck} ${styles.buttonSortAB}`} type="button"><img src={abSort}/></Button>
+     <Button  className={`${styles.buttonGoBuck} ${styles.buttonSortBA}`} type="button"><img src={baSort}/></Button>
   </Form>
+  <GalleryList/>
   </div>
      </>
     );
   }
 }
+const mapStateToProps = state => ({
+  images: selectors.getImages(state),
+});
+const mapDispatchToProps = dispatch => ({
+  select: (obj) => dispatch(operations.getBreedImages(obj))
+});
 
-
-export default BreedsPage;
+export default connect(mapStateToProps, mapDispatchToProps)(BreedsPage);
