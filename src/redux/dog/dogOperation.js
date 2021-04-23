@@ -41,7 +41,7 @@ const getImages = () => (dispatch) => {
   }
   const getBreedImages = ({limit, breed}) => (dispatch) => {
     const parseNumber = parseInt(limit.replace(/\D+/g,""));
-
+    console.log(parseNumber, breed)
     console.log( parseNumber, breed)
     dispatch(getBreedImagesRequest());
     axios

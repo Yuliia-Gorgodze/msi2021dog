@@ -23,7 +23,6 @@ componentDidMount () {
     }
      )}
      </ul>
-
       </div>
      ) 
    }

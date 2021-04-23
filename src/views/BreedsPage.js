@@ -21,18 +21,19 @@ state = {
 handleChange = (e) => {
 this.setState({[e.target.name]: e.target.value})
 
+// this.props.select(this.state)
 }
 componentDidMount() {
-  console.log(this.props)
+  // console.log(this.props)
   this.props.select(this.state)
 }
-onSubmiteForm = event => {
-  event.preventDefault();
-  
-}
+
 sortAB = () => {
-  console.log(this.props.images)
-  //  this.props.images.sort()
+  // console.log('soort, ', this.props.images)
+  const sortName = this.props.images.sort((current, next) => {return current.name.localeCompare (next.name)})
+   console.log('soooort', sortName)
+  // console.log(this.props.images
+   
 }
   render() {
     return (
@@ -47,7 +48,7 @@ sortAB = () => {
      </div>
     
   <Form.Group >
-    <Form.Control onSelect={this.onSubmiteForm}  className={styles.input} onChange={this.handleChange} name='breed'  as="select" >
+    <Form.Control onBlur={this.handleChange}  className={styles.input}  name='breed'  as="select" >
       <option>All breeds</option>
       <option>Affenpinscher</option>
       <option>Afghan Hound</option>
@@ -59,7 +60,7 @@ sortAB = () => {
     </Form.Control>
   </Form.Group>
   <Form.Group >
-    <Form.Control  className={styles.inputLimit} name='limit' as="select" >
+    <Form.Control onBlur={this.handleChange}  className={styles.inputLimit} name='limit' as="select" >
     <option>Limit: 5</option>
       <option>Limit: 10</option>
       <option>Limit: 15</option>
@@ -67,7 +68,7 @@ sortAB = () => {
     </Form.Control>
   </Form.Group>
   <Button onClick={this.sortAB} className={`${styles.buttonGoBuck} ${styles.buttonSortAB}`} type="button"><img src={abSort}/></Button>
-     <Button  className={`${styles.buttonGoBuck} ${styles.buttonSortBA}`} type="button"><img src={baSort}/></Button>
+     <Button   className={`${styles.buttonGoBuck} ${styles.buttonSortBA}`} type="button"><img src={baSort}/></Button>
   </Form>
   <GalleryList/>
   </div>
