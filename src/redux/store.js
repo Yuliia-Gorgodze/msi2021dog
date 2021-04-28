@@ -1,4 +1,4 @@
-import reducer from './rootReducer';
+// import reducer from './rootReducer';
 import { logger } from 'redux-logger';
 import {
   persistStore,
@@ -12,12 +12,13 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-
-const contactsPersistConfig = {
-  key: 'dog',
-  storage,
-
-};
+import favoriteDogReducer from './favorites/favoritesReducer'
+import dogReducer from './dog/dogReducer';
+import likeDogs from './likesDogReducer/likesDogReducer'
+// const contactsPersistConfig = {
+//   key: 'dog',
+//   storage,
+// };
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -26,11 +27,25 @@ const middleware = [
   }),
   logger,
 ];
-
+// const store = configureStore({
+//   reducer: {
+//     auth: persistReducer(authPersistConfig, authReducer),
+//     contactReducer: reducer,
+//     error,
+//     loading
+//   },
+//   middleware,
+//   devTools: process.env.NODE_ENV === 'development',
+// });
 const store = configureStore({
-  reducer: persistReducer(contactsPersistConfig, reducer),
+  reducer: {
+    dog: dogReducer,
+
+    favorite: favoriteDogReducer,
+    likes: likeDogs
+  },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
 const persistor = persistStore(store);
-export default { store, persistor };
+export default store;

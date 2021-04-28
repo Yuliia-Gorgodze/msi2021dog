@@ -13,3 +13,8 @@ export const getBreedImagesRequest = createAction('GET_BREED_IMAGES_REQUEST')
 export const getBreedImagesSuccess = createAction('GET_BREED_IMAGES_SUCCESS')
 export const getBreedImagesError = createAction('GET_BREED_IMAGES_ERROR')
 
+export const sortABSuccess = createAction('SORT_AB_SUCCESS')
+export const sortBASuccess = createAction('SORT_BA_SUCCESS')
+
+
+

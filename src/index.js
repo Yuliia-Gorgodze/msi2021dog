@@ -7,15 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'modern-normalize';
 import store from './redux/store';
 import App from './App';
-
+console.log(store)
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store.store}>
-      <PersistGate loading={null} persistor={store.persistor}>
+    <Provider store={store}>
+     
      <BrowserRouter>
       <App />
       </BrowserRouter>
-      </PersistGate>
+  
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

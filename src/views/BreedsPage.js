@@ -11,6 +11,8 @@ import selectors from '../redux/dog/dogSelectors'
 import operations from '../redux/dog/dogOperation'
 // import ModalUpload from '../components/ModalUpload'
 import GalleryList from '../components/GalleryList'
+import BreedsInformation from '../components/BreedInformation'
+import Search from '../components/SearchNameMenu'
 
 class BreedsPage extends Component {
 state = {
@@ -18,33 +20,56 @@ state = {
   limit: 'Limit: 5',
 
 }
+componentDidMount(){
+  this.props.select(this.state)
+}
 handleChange = (e) => {
 this.setState({[e.target.name]: e.target.value})
 
-// this.props.select(this.state)
-}
-componentDidMount() {
-  // console.log(this.props)
-  this.props.select(this.state)
+this.props.select(this.state)
+
 }
 
 sortAB = () => {
-  // console.log('soort, ', this.props.images)
-  const sortName = this.props.images.sort((current, next) => {return current.name.localeCompare (next.name)})
-   console.log('soooort', sortName)
-  // console.log(this.props.images
-   
-}
+  const { images } = this.props;
+  console.log(images)
+  const sortName = [...images].sort(function compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  console.log('sortName :>> ', sortName);
+  this.props.sortAB(sortName)
+};
+sortBA = () => {
+  const { images } = this.props;
+  console.log(images)
+  const sortName = [...images].sort(function compare(a, b) {
+    if (a.name > b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  console.log('sortName :>> ', sortName);
+  this.props.sortBA(sortName)
+};
+
   render() {
     return (
      <>
-     
+     <Search/>
      <div className={styles.containerBreeds}>
      
   <Form  className={styles.form}>
   <div className={styles.buttonGroup}><Button className={styles.buttonGoBuck} type="button"><img src={goBack}/></Button>
      <Button className={`${styles.buttonBreeds} ${styles.button}` } disabled type="button">breeds</Button>
-
      </div>
     
   <Form.Group >
@@ -68,10 +93,11 @@ sortAB = () => {
     </Form.Control>
   </Form.Group>
   <Button onClick={this.sortAB} className={`${styles.buttonGoBuck} ${styles.buttonSortAB}`} type="button"><img src={abSort}/></Button>
-     <Button   className={`${styles.buttonGoBuck} ${styles.buttonSortBA}`} type="button"><img src={baSort}/></Button>
+     <Button  onClick={this.sortBA}  className={`${styles.buttonGoBuck} ${styles.buttonSortBA}`} type="button"><img src={baSort}/></Button>
   </Form>
-  <GalleryList/>
+  <GalleryList images={this.props.images}/>
   </div>
+  <BreedsInformation/>
      </>
     );
   }
@@ -80,7 +106,9 @@ const mapStateToProps = state => ({
   images: selectors.getImages(state),
 });
 const mapDispatchToProps = dispatch => ({
-  select: (obj) => dispatch(operations.getBreedImages(obj))
+  select: (obj) => dispatch(operations.getBreedImages(obj)),
+  sortAB: (images) => dispatch(operations.sortAB(images)),
+  sortBA: (images) => dispatch(operations.sortBA(images))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreedsPage);

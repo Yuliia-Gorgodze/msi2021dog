@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import styles from './styles/galleryPage.module.css'
 import goBack from '../img/goBack.svg'
 import submit from '../img/submit.svg'
-
+import selectors from '../redux/dog/dogSelectors'
 import operations from '../redux/dog/dogOperation'
+import operationsFavorite from '../redux/favorites/favoritesOperations'
 import ModalUpload from '../components/ModalUpload'
 import GalleryList from '../components/GalleryList'
 
@@ -23,12 +24,20 @@ state = {
 handleChange = (e) => {
 this.setState({[e.target.name]: e.target.value})
 }
-
+componentDidMount =()=> {
+  this.props.select(this.state)
+}
 onSubmiteForm = event => {
   event.preventDefault();
   console.log('state', this.state)
   this.props.select(this.state)
 }
+addFavoriteDogs =(event)=> {
+  console.log(event)
+  const id = event.target.id;
+  console.log(id)
+  this.props.addFavorite(id)
+  }
   render() {
     
     
@@ -85,17 +94,20 @@ onSubmiteForm = event => {
   <Button onClick={this.onSubmiteForm}  className={styles.buttonGoBuck} type="submit"><img src={submit}/></Button>
   </Form>
   </div>
-  <GalleryList  />
+  <GalleryList images={this.props.images} onClick={this.addFavoriteDogs} />
 
      </>
     );
   }
 }
-
+const mapStateToProps = state => ({
+  images: selectors.getImages(state),
+});
 const mapDispatchToProps = dispatch => ({
-  select: (obj) => dispatch(operations.getImagesForm(obj))
+  select: (obj) => dispatch(operations.getImagesForm(obj)),
+  addFavorite: (id) => dispatch(operationsFavorite.addFavoriteImage(id))
 });
 
-export default connect(null, mapDispatchToProps)(GalleryPage);
+export default connect(mapStateToProps, mapDispatchToProps)(GalleryPage);
 
  

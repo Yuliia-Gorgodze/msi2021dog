@@ -8,10 +8,13 @@ import
  getImagesFormError,
  getBreedImagesRequest,
  getBreedImagesSuccess,
- getBreedImagesError} 
+ getBreedImagesError,
+ sortBASuccess, 
+ sortABSuccess,
+} 
 from './dogActions'
 
-axios.defaults.baseURL = `https://api.thecatapi.com/v1`
+axios.defaults.baseURL = `https://api.thedogapi.com/v1`
 
 const options = {
     headers: {
@@ -41,8 +44,6 @@ const getImages = () => (dispatch) => {
   }
   const getBreedImages = ({limit, breed}) => (dispatch) => {
     const parseNumber = parseInt(limit.replace(/\D+/g,""));
-    console.log(parseNumber, breed)
-    console.log( parseNumber, breed)
     dispatch(getBreedImagesRequest());
     axios
       .get(`/breeds?limit=${parseNumber}&q=${breed}`, options)
@@ -52,8 +53,16 @@ const getImages = () => (dispatch) => {
       })
       .catch((error) => dispatch(getBreedImagesError(error)))
   }
+ 
+  const sortAB = (images) => (dispatch) => {
+
+   dispatch(sortABSuccess(images));
+
+  }
+  const sortBA = (images) => (dispatch) => {
+   console.log(images)
+    dispatch(sortBASuccess(images));
+   }
 
 
-
-
-  export default {getImages, getImagesForm, getBreedImages};
+  export default {getImages, getImagesForm, getBreedImages, sortAB, sortBA};

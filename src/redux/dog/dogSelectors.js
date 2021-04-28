@@ -1,3 +1,3 @@
-const getImages = (state) => state.dogReducer
+const getImages = (state) => state.dog
 
 export default {getImages}

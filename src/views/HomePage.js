@@ -9,6 +9,9 @@ import HomePreviews from '../components/HomePreviewsImg'
 import Search from '../components/SearchNameMenu'
 import Breeds from './BreedsPage'
 import Voting from './VotingPage'
+import favorite from './favoriteDogsPage'
+import likeDogs from './LikesDogsViews'
+import favoriteDogs from './favoriteDogsPage'
 class HomePage extends Component {
    state = {
        renderPage : false
@@ -25,12 +28,13 @@ class HomePage extends Component {
             </div>
              <div className={styles.container}>
              <Route exact path="/" component={HomePreviews} />
-             <Route path="/gallery" component={Search} />
              <Route path="/gallery" component={GalleryPage} />
-             <Route path="/breeds" component={Search} />
              <Route path="/breeds" component={Breeds} />
-             <Route path="/voting" component={Search} />
              <Route path="/voting" component={Voting} />
+             <Route path="/favorite" component={favorite} />
+             <Route path='/likeDogs' component={likeDogs} />
+             <Route path='/favoriteDogs' component={favoriteDogs}/>
+             <Route path='/dislikeDogs' component={favoriteDogs}/>
              </div>
             </div>
             </>)
